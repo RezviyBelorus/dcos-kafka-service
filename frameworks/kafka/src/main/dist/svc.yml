@@ -45,10 +45,10 @@ pods:
         file: jmx/key_store
       jmxTrustStorePass:
         secret: {{SECURE_JMX_TRUST_STORE_PASSWORD}}
-        env-key: SECURE_JMX_TRUST_STORE_PASSWORD
+        file: SECURE_JMX_TRUST_STORE_PASSWORD
       jmxKeyStorePass:
         secret: {{SECURE_JMX_KEY_STORE_PASSWORD}}
-        env-key: SECURE_JMX_KEY_STORE_PASSWORD
+         file: SECURE_JMX_KEY_STORE_PASSWORD
       {{/TASKCFG_SECURE_JMX_ENABLED}}
       {{/TASKCFG_ALL_SECURITY_KERBEROS_ENABLED}}
     {{#TASKCFG_SECURE_JMX_ENABLED}}
@@ -132,7 +132,12 @@ pods:
         {{/TASKCFG_ALL_SECURITY_KERBEROS_DEBUG}}
       {{/TASKCFG_ALL_SECURITY_KERBEROS_ENABLED}}
       {{#TASKCFG_SECURE_JMX_ENABLED}}
+
+          # create an empty trust store
+          keytool -import -file
+
           export JMX_PORT={{SECURE_JMX_PORT}}
+
           export KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port={{SECURE_JMX_PORT}} "
           export KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.password.file=keyfile -Dcom.sun.management.jmxremote.access.file=$MESOS_SANDBOX/jmx/access_file"
           export KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.registry.ssl=true -Djavax.net.ssl.keyStore=$MESOS_SANDBOX/jmx/key_store"

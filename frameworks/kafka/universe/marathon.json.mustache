@@ -130,6 +130,7 @@
     {{/service.security.authorization.enabled}}
 
     "TASKCFG_SECURE_JMX_ENABLED": "{{service.jmx.enabled}}",
+    "TASKCFG_SECURE_JMX_ADD_DCOS_CRT": "{{service.jmx.add_dcos_crt}}",
     {{#service.jmx.enabled}}
 	"SECURE_JMX_PORT" : "{{service.jmx.port}}",
 	"SECURE_JMX_PWD_FILE" : "{{service.jmx.password_file}}",

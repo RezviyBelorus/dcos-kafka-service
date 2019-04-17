@@ -233,6 +233,21 @@
                 false
               ],
               "default": false
+            },
+            "add_dcos_crt": {
+              "title": "Add DC/OS certificates for secure JMX configuration",
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "description": "By default DC/OS certificates are added to the trust store.",
+                  "type": "boolean",
+                  "enum": [
+                    true,
+                    false
+                  ],
+                  "default": true
+                }
+              }
             }
           },
           "dependencies": {
